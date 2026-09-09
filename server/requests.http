@@ -1,0 +1,65 @@
+@baseUrl = http://localhost:3001/api
+
+### Expenses
+
+GET {{baseUrl}}/expenses
+
+###
+
+GET {{baseUrl}}/expenses/1
+
+###
+
+POST {{baseUrl}}/expenses
+Content-Type: application/json
+
+{
+  "description": "Lunch",
+  "amount": 12.50,
+  "categoryId": 1
+}
+
+###
+
+PUT {{baseUrl}}/expenses/1
+Content-Type: application/json
+
+{
+  "description": "Updated lunch",
+  "amount": 15.00,
+  "categoryId": 1
+}
+
+###
+
+DELETE {{baseUrl}}/expenses/1
+
+### Categories
+
+GET {{baseUrl}}/categories
+
+###
+
+GET {{baseUrl}}/categories/1
+
+###
+
+POST {{baseUrl}}/categories
+Content-Type: application/json
+
+{
+  "name": "Food"
+}
+
+###
+
+PUT {{baseUrl}}/categories/d7e7cbd0-5880-4e23-82d9-420a72fc875c
+Content-Type: application/json
+
+{
+  "name": "Lifestyle"
+}
+
+###
+
+DELETE {{baseUrl}}/categories/1
