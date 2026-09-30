@@ -18,7 +18,7 @@ import { pool } from "../db/pool.js";
 	},
 ]; */
 
-function toExpense(row: {
+export function toExpense(row: {
     id: string;
     description: string;
     amount: string;
