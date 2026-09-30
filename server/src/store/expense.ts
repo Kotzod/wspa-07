@@ -28,11 +28,15 @@ export function toExpense(row: {
         id: row.id,
         description: row.description,
         amount: Number(row.amount),
-        date:
-			row.date instanceof Date
-			? row.date.toISOString().slice(0, 10)
-			: row.date,
+        date: formatDate(row.date),
     };
+}
+
+function formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
 }
 
 export async function getExpenses(): Promise<Expense[]> {
