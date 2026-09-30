@@ -5,17 +5,21 @@
 	"type": "module",
 	"main": "src/server.ts",
 	"scripts": {
-		"dev": "tsx watch src/server.ts",
+		"dev": "tsx watch --env-file=.env src/server.ts",
 		"build": "tsc",
 		"start": "node dist/server.js",
 		"lint": "biome check .",
-		"lint:fix": "biome check --write ."
+		"lint:fix": "biome check --write .",
+		"test": "vitest --run",
+    	"test:watch": "vitest",
+    	"test:coverage": "vitest run --coverage"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
 		"cors": "^2.8.6",
+		"dotenv": "^18.0.4",
 		"express": "^5.2.1",
 		"pg": "^8.23.0"
 	},
