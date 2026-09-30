@@ -1,7 +1,7 @@
 import { pool } from "../db/pool.js";
 import type { Category, NewCategory } from "../types/category.js";
 
-function toCategory(row: {
+export function toCategory(row: {
     id: string;
     name: string;
 }): Category {
