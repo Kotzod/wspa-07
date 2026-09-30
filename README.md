@@ -1,6 +1,6 @@
 # Expense Tracker
 
-Starting point for the Web Software Production course project. 
+Starting point for the Web Software Production course project.
 This project will grow week by week.
 
 - `client/` — React + Vite + TypeScript frontend
@@ -73,6 +73,14 @@ src/
     ExpenseListItem.tsx     # a row; toggles its own view/edit mode
     ExpenseTotal.tsx        # running total
   App.tsx                   # composition root, no fetch/state logic itself
+```
+
+## Testing for server
+Run from inside server directory:
+
+```
+cd server
+npm test
 ```
 
 ## Linting

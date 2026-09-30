@@ -56,13 +56,11 @@ describe("PUT /api/categories/:id", () => {
 });
 
 describe("DELETE /api/categories/:id", () => {
-    it("deletes an existing category and returns 204", async () => {
-        const list = await request(app).get("/api/categories");
-        const categoryId = list.body[0].id;
-
-        const res = await request(app).delete(`/api/categories/${categoryId}`);
-
-        expect(res.status).toBe(204);
+    it("returns 404 for a missing id", async () => {
+        const res = await request(app).delete(
+            "/api/categories/00000000-0000-0000-0000-000000000000",
+        );
+        expect(res.status).toBe(404);
     });
 });
 

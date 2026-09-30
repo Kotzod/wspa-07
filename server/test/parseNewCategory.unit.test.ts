@@ -4,9 +4,9 @@ import { parseNewCategory } from "../src/routes/category.js";
 describe("parseNewCategory", () => {
     it("returns the parsed category when the body is valid", () => {
         const result = parseNewCategory({
-            name: "Electronics",
+            name: "Groceries",
         });
-        expect(result).toEqual({ name: "Electronics" });
+        expect(result).toEqual({ name: "Groceries" });
     });
 
     it("returns null when name is missing", () => {
