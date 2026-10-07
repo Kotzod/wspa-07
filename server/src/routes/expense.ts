@@ -28,7 +28,7 @@ export function parseNewExpense(body: unknown): NewExpense | null {
 export const expenseRouter = Router();
 
 expenseRouter.get("/", async (_req, res) => {
-    res.json(await getExpenses());
+	res.json(await getExpenses());
 });
 
 expenseRouter.post("/", async (req, res) => {
