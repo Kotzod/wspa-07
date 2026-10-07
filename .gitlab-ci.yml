@@ -67,7 +67,7 @@ test-client:
   script:
     - cd client
     - npm ci
-    - npm test
+    - npm run test:e2e
 
 test-e2e:
   stage: e2e
