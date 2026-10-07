@@ -55,7 +55,7 @@ test-server:
     PGDATABASE: app_test_db
   script:
     - apt-get update && apt-get install -y postgresql-client
-    - psql -h postgres -U app -d app_test_db -f db/init/001_schema.sql
+    - psql -h postgres -U app -d app_test_db -f db/init/001-schema.sql
     - cd server
     - npm ci
     - npm test
