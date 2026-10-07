@@ -2,6 +2,7 @@ stages:
   - lint
   - build
   - test
+  - e2e
 
 # Lint the client.
 lint-client:
@@ -20,7 +21,6 @@ lint-server:
     - cd server
     - npm ci
     - npm run lint
-    - e2e
 
 # Compile the server. Fails if the TypeScript doesn't type-check.
 build-server:
