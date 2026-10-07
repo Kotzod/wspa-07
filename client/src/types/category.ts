@@ -1,7 +1,7 @@
 // client/src/types/category.ts
 export type Category = {
-    id: string;
-    name: string;
+	id: string;
+	name: string;
 };
 
 // Shape of the data sent when creating or updating a category.

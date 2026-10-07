@@ -3,34 +3,34 @@ import { useState } from "react";
 import type { Category, NewCategory } from "../types/category";
 
 type CategoryListItemProps = {
-    category: Category;
-    onUpdate: (id: string, category: NewCategory) => void;
-    onDelete: (id: string) => void;
+	category: Category;
+	onUpdate: (id: string, category: NewCategory) => void;
+	onDelete: (id: string) => void;
 };
 
 // A single row, in either view or edit mode. Editing state is local to
 // the row so rows don't need to know about each other.
 export function CategoryListItem({
-    category,
-    onUpdate,
-    onDelete,
+	category,
+	onUpdate,
+	onDelete,
 }: CategoryListItemProps) {
-    const [isEditing, setIsEditing] = useState(false);
-    const [name, setName] = useState(category.name);
+	const [isEditing, setIsEditing] = useState(false);
+	const [name, setName] = useState(category.name);
 
-    function startEdit() {
-        setName(category.name);
-        setIsEditing(true);
-    }
+	function startEdit() {
+		setName(category.name);
+		setIsEditing(true);
+	}
 
-    function handleSave() {
-        onUpdate(category.id, {
-                    name,
-                });
-                setIsEditing(false);
-    }
+	function handleSave() {
+		onUpdate(category.id, {
+			name,
+		});
+		setIsEditing(false);
+	}
 
-    if (isEditing) {
+	if (isEditing) {
 		return (
 			<li>
 				<input
@@ -60,5 +60,4 @@ export function CategoryListItem({
 			</button>
 		</li>
 	);
-
 }

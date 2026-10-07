@@ -5,27 +5,30 @@ import type { Category, NewCategory } from "../types/category";
 
 // Owns the categories list and keeps it in sync with the API.
 export function useCategories() {
-    const [categories, setCategories] = useState<Category[]>([]);
+	const [categories, setCategories] = useState<Category[]>([]);
 
-    useEffect(() => {
+	useEffect(() => {
 		categoriesApi.fetchCategories().then(setCategories);
 	}, []);
 
-    async function addCategory(category: NewCategory) {
-        const created = await categoriesApi.createCategory(category);
+	async function addCategory(category: NewCategory) {
+		const created = await categoriesApi.createCategory(category);
 		setCategories((current) => [...current, created]);
-    }
+	}
 
-    async function editCategory(id: string, category: NewCategory) {
-        const updated = await categoriesApi.updateCategory(id, category);
+	async function editCategory(id: string, category: NewCategory) {
+		const updated = await categoriesApi.updateCategory(id, category);
 		setCategories((current) =>
 			current.map((existing) => (existing.id === id ? updated : existing)),
-		);    }
+		);
+	}
 
-    async function removeCategory(id: string) {
+	async function removeCategory(id: string) {
 		await categoriesApi.deleteCategory(id);
-		setCategories((current) => current.filter((category) => category.id !== id));
-    }
+		setCategories((current) =>
+			current.filter((category) => category.id !== id),
+		);
+	}
 
-    return { categories, addCategory, editCategory, removeCategory };
+	return { categories, addCategory, editCategory, removeCategory };
 }
