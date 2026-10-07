@@ -1,20 +1,20 @@
 import { useState } from "react";
+import { CategoryForm } from "./components/CategoryForm";
+import { CategoryList } from "./components/CategoryList";
 import { ExpenseForm } from "./components/ExpenseForm";
 import { ExpenseList } from "./components/ExpenseList";
 import { ExpenseTotal } from "./components/ExpenseTotal";
-import { useExpenses } from "./hooks/useExpenses";
-import { CategoryForm } from "./components/CategoryForm";
-import { CategoryList } from "./components/CategoryList";
 import { useCategories } from "./hooks/useCategories";
+import { useExpenses } from "./hooks/useExpenses";
 
 type View = "expenses" | "categories";
-
 
 // Composition root: wires the data hook to the presentational components.
 // No fetch/state logic here on purpose — see hooks/useExpenses.ts.
 function App() {
 	const [view, setView] = useState<View>("expenses");
-	const { categories, addCategory, editCategory, removeCategory } = useCategories();
+	const { categories, addCategory, editCategory, removeCategory } =
+		useCategories();
 	const { expenses, addExpense, editExpense, removeExpense } = useExpenses();
 
 	return (
@@ -39,18 +39,23 @@ function App() {
 			</nav>
 
 			{view === "expenses" ? (
-				 <>
-				 	<ExpenseForm onAdd={addExpense} />
+				<>
+					<ExpenseForm onAdd={addExpense} />
 					<ExpenseList
 						expenses={expenses}
 						onUpdate={editExpense}
-						onDelete={removeExpense} />
+						onDelete={removeExpense}
+					/>
 					<ExpenseTotal expenses={expenses} />
 				</>
 			) : (
 				<>
 					<CategoryForm onAdd={addCategory} />
-					<CategoryList categories={categories} onUpdate={editCategory} onDelete={removeCategory} />
+					<CategoryList
+						categories={categories}
+						onUpdate={editCategory}
+						onDelete={removeCategory}
+					/>
 				</>
 			)}
 		</>
