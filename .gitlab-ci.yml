@@ -61,14 +61,6 @@ test-server:
     - npm ci
     - npm test
 
-test-client:
-  stage: test
-  image: node:22
-  script:
-    - cd client
-    - npm ci
-    - npm run test:e2e
-
 test-e2e:
   stage: e2e
   # This image ships with browsers preinstalled — Playwright needs one.
