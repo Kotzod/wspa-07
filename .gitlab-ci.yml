@@ -28,3 +28,13 @@ build-server:
     - cd server
     - npm ci
     - npm run build
+
+# Compile the client. Fails if the TypeScript doesn't type-check.
+build-client:
+  stage: build
+  image: node:22
+  script:
+    - cd client
+    - npm ci
+    - npm run build
+
