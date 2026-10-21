@@ -1,7 +1,5 @@
 name: CI
 
-# GitLab runs a pipeline on every push and every merge request.
-# The GitHub equivalent is push + pull_request.
 on:
   push:
     branches: [main]
@@ -9,7 +7,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  # ---------- lint stage ----------
   lint-client:
     runs-on: ubuntu-latest
     defaults:
@@ -40,9 +37,6 @@ jobs:
       - run: npm ci
       - run: npm run lint
 
-  # ---------- build stage ----------
-  # GitLab stages are barriers: build starts only when *every* lint job passed.
-  # GitHub has no stages, so we reproduce that with needs: on both lint jobs.
   build-client:
     needs: [lint-client, lint-server]
     runs-on: ubuntu-latest
@@ -75,15 +69,10 @@ jobs:
       - run: npm ci
       - run: npm run build
 
-  # ---------- test stage ----------
   test-server:
     needs: [build-client, build-server]
     runs-on: ubuntu-latest
 
-    # Job-level env: read by the tests (PG*) and by psql in the schema step.
-    # The job runs directly on the runner (no container:), so the Postgres
-    # service is reached through its mapped port on localhost, not at the
-    # hostname "postgres" like in GitLab.
     env:
       PGHOST: localhost
       PGPORT: "5432"
@@ -95,14 +84,11 @@ jobs:
       postgres:
         image: postgres:16
         env:
-          # Read by the postgres container on boot (same as GitLab).
           POSTGRES_USER: app
           POSTGRES_PASSWORD: app_pw
           POSTGRES_DB: app_test_db
         ports:
           - 5432:5432
-        # GitLab waits for service ports on its own; GitHub does not,
-        # so we tell it how to check that Postgres is ready.
         options: >-
           --health-cmd "pg_isready -U app -d app_test_db"
           --health-interval 5s
@@ -117,8 +103,6 @@ jobs:
           cache: npm
           cache-dependency-path: server/package-lock.json
 
-      # The service creates an empty database; load the real schema ourselves.
-      # psql is preinstalled on ubuntu-latest, so no apt-get step is needed.
       - name: Load schema
         run: psql -f db/init/001-schema.sql
 
